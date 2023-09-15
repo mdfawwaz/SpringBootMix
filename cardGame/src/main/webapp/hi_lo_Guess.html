@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Number Guessing</title>
+</head>
+<body>
+	<h1>Your current Numbers are:</h1>
+	<p>Random Number 1: <span id="randomNumber1"></span></p>
+	<p>Random Number 2: <span id="randomNumber2" style="display: none;"></span></p>
+	<button id="increaseButton">Increase</button>
+	<button id="decreaseButton">Decrease</button>
+	<p id="resultMessage"></p>
+	<p id="score">Score: 0</p>
+	<script>
+		function getRandom(max) {
+			return Math.floor(Math.random() * max);
+		}
+
+		var maxNumber1 = 100;
+		var maxNumber2 = 50;
+
+		var increaseButton = document.getElementById("increaseButton");
+		var decreaseButton = document.getElementById("decreaseButton");
+		var resultMessage = document.getElementById("resultMessage");
+		var randomNumber2Element = document.getElementById("randomNumber2");
+		var scoreElement = document.getElementById("score");
+
+		var score = 0;
+		var randomNumber1 = 0;
+		var randomNumber2 = 0;
+
+		function startRound() {
+			randomNumber1 = getRandom(maxNumber1);
+			document.getElementById("randomNumber1").textContent = randomNumber1;
+			randomNumber2 = getRandom(maxNumber2);
+			randomNumber2Element.style.display = "none"; // Hide the second random number
+			resultMessage.textContent = ""; // Clear the result message
+		}
+
+		increaseButton.addEventListener("click", function() {
+			if (randomNumber2 > randomNumber1) {
+				resultMessage.textContent = "You are correct!";
+				score++;
+			} else {
+				resultMessage.textContent = "Try again.";
+				score = 0; // Reset score on wrong guess
+			}
+			scoreElement.textContent = "Score: " + score;
+			randomNumber2Element.textContent = "Random Number 2: " + randomNumber2; // Show the second random number
+			startRound();
+		});
+
+		decreaseButton.addEventListener("click", function() {
+			if (randomNumber2 < randomNumber1) {
+				resultMessage.textContent = "You are correct!";
+				score++;
+			} else {
+				resultMessage.textContent = "Try again.";
+				score = 0; // Reset score on wrong guess
+			}
+			scoreElement.textContent = "Score: " + score;
+			randomNumber2Element.textContent = "Random Number 2: " + randomNumber2; // Show the second random number
+			startRound();
+		});
+
+		startRound(); // Start the first round
+
+	</script>
+</body>
+</html>

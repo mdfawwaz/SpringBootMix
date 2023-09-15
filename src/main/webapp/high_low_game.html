@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Number Game</title>
+</head>
+<body>
+  <h1>Random Number Game</h1>
+  <p>Click on one of the buttons below:</p>
+  <div id="number">Random Number: <span id="randomNumber">?</span></div>
+  <div id="buttons">
+    <button id="button1" onclick="checkButtonClick('greater')">Greater</button>
+    <button id="button2" onclick="checkButtonClick('less')">Less</button>
+  </div>
+
+  <div id="result"></div>
+
+  <script>
+    const randomNumberDisplay = document.getElementById('randomNumber');
+    let currentRandomNumber = generateRandomNumber();
+    randomNumberDisplay.textContent = currentRandomNumber;
+
+    function generateRandomNumber() {
+      return Math.floor(Math.random() * 100) + 1;
+    }
+
+    function checkButtonClick(buttonClicked) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "ButtonClickServlet", true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          let response = xhr.responseText;
+          document.getElementById("result").textContent = response;
+
+          if (buttonClicked === "greater") {
+            if (response === "Correct! You clicked the Greater button.") {
+              document.getElementById("result").style.color = "green";
+            } else {
+              document.getElementById("result").style.color = "red";
+            }
+          } else if (buttonClicked === "less") {
+            if (response === "Correct! You clicked the Less button.") {
+              document.getElementById("result").style.color = "green";
+            } else {
+              document.getElementById("result").style.color = "red";
+            }
+          }
+        }
+      };
+      xhr.send("buttonClicked=" + buttonClicked);
+    }
+  </script>
+</body>
+</html>

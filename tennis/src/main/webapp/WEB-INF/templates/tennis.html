@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #36393f;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #2f3136;
+    background-color: #2f3136;
+  }
+
+  th, td {
+    border: 1px solid #2f3136;
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #202225;
+    color: #ffffff;
+  }
+
+  td {
+    background-color: #36393f;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+
+  button {
+    background-color: #7289da;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  button#reset {
+	  margin-top: 20px;
+    background-color: #e74c3c;
+    margin-left: 20px;
+  }
+
+  button#player1Button {
+    background-color: #43b581;
+    margin-left: 20px;
+  }
+
+  button#player2Button {
+    background-color: #a881af;
+  }
+
+  form#playerNamesForm {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #2f3136;
+    border-radius: 5px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #2f3136;
+    border-radius: 5px;
+    background-color: #36393f;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  input[type="text"]:focus {
+    border-color: #7289da;
+  }
+
+  input[type="submit"] {
+    background-color: #7289da;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  tr:hover {
+    background-color: #4a5a9c;
+  }
+
+  h1 {
+    font-size: 24px;
+    color: #7289da;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<table>
+  <tr>
+    <th>Player</th>
+    <th>Score</th>
+    <th>Game</th>
+    <th>Set</th>
+  </tr>
+  <tr>
+    <!-- here to display player 1 name -->
+    <td th:text="${player1Name}" >Player 1</td> 
+    <td th:text="${player1score}"></td>
+    <td th:text="${player1MatchesWon}"></td>
+    <td th:text="${player1SetsWon}"></td>
+  </tr>
+  <tr>
+    <!-- here to display player 2 name -->
+    <td th:text="${player2Name}">Player 2</td>
+    <td th:text="${player2score}"></td>
+    <td th:text="${player2MatchesWon}"></td>
+    <td th:text="${player2SetsWon}"></td>
+  </tr>
+</table>
+
+<form action="" method="post">
+	<button id="player1Button" name="player1Button">Point Player 1</button>
+	<button id="player2Button" name="player2Button">Point Player 2</button>
+	<button id="reset" name="reset">Reset</button>
+</form>
+
+
+<form id="playerNamesForm" action="" method="post">
+    <label for="player1Name">Player 1 Name:</label>
+    <input type="text" id="player1Name" name="player1Name" required><br><br>
+    
+    <label for="player2Name">Player 2 Name:</label>
+    <input type="text" id="player2Name" name="player2Name" required><br><br>
+    
+    <input type="submit" value="Start Game">
+</form>
+	<h1 th:text="${winnerP1}" ></h1>
+	<h1 th:text="${winnerP2}" ></h1>
+</body>
+</html>
